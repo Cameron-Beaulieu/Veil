@@ -118,5 +118,3 @@ def classifyImages():
 
         listOfAllClassifiedImages.append([img,assignLabelToImage(labelsAndPercentages)])
     return listOfAllClassifiedImages
-
-print(classifyImages())
