@@ -25,13 +25,21 @@ import numpy as np
 from PIL import Image
 import tensorflow as tf # TF2
 
-
+def assignLabelToImage (dictionaryOfValuesandLabels):
+  highestPercentage = 0
+  highestLabel = ""
+  for key in dictionaryOfValuesandLabels:
+    if dictionaryOfValuesandLabels[key] > highestPercentage:
+      highestPercentage = dictionaryOfValuesandLabels[key]
+      highestLabel= key
+  return highestLabel
+    
 def load_labels(filename):
   with open(filename, 'r') as f:
     return [line.strip() for line in f.readlines()]
 
 
-if __name__ == '__main__':
+def classifyImages():
   parser = argparse.ArgumentParser()
   parser.add_argument(
       '-i',
@@ -92,10 +100,15 @@ if __name__ == '__main__':
 
   top_k = results.argsort()[-5:][::-1]
   labels = load_labels(args.label_file)
+  labelsAndPercentages = {}
   for i in top_k:
     if floating_model:
       print('{:08.6f}: {}'.format(float(results[i]), labels[i]))
     else:
       print('{:08.6f}: {}'.format(float(results[i] / 255.0), labels[i]))
+    labelsAndPercentages[labels[i]] = results[i]
 
   print('time: {:.3f}ms'.format((stop_time - start_time) * 1000))
+  print(assignLabelToImage(labelsAndPercentages))
+
+classifyImages()

@@ -26,13 +26,21 @@ import numpy as np
 from PIL import Image
 import tensorflow as tf  # TF2
 
-
+def assignLabelToImage (dictionaryOfValuesandLabels):
+  highestPercentage = 0
+  highestLabel = ""
+  for key in dictionaryOfValuesandLabels:
+    if dictionaryOfValuesandLabels[key] > highestPercentage:
+      highestPercentage = dictionaryOfValuesandLabels[key]
+      highestLabel= key
+  return highestLabel
+  
 def load_labels(filename):
     with open(filename, "r") as f:
         return [line.strip() for line in f.readlines()]
 
 
-if __name__ == "__main__":
+def classifyImages():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-t", "--tests", default="tests", help="folder of test images to be classified"
@@ -62,7 +70,7 @@ if __name__ == "__main__":
     num_files = len(list)
     print(list)
     print(num_files)
-
+    listOfAllClassifiedImages = []
     for file in list:
 
         interpreter = tf.lite.Interpreter(
@@ -99,10 +107,16 @@ if __name__ == "__main__":
 
         top_k = results.argsort()[-5:][::-1]
         labels = load_labels(args.label_file)
+        labelsAndPercentages = {}
         for i in top_k:
             if floating_model:
-                print("{:08.6f}: {}".format(float(results[i]), labels[i]))
+                labelsAndPercentages[labels[i]] = results[i]
             else:
-                print("{:08.6f}: {}".format(float(results[i] / 255.0), labels[i]))
+                print("one of the results of top_k was not a floating_model")
+                sys.exit(1)
+        
 
-        print("time: {:.3f}ms".format((stop_time - start_time) * 1000))
+        listOfAllClassifiedImages.append([img,assignLabelToImage(labelsAndPercentages)])
+    return listOfAllClassifiedImages
+
+print(classifyImages())
