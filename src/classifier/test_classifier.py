@@ -25,6 +25,7 @@ import os
 import numpy as np
 from PIL import Image
 import tensorflow as tf  # TF2
+from tensorflow import keras
 
 
 def load_labels(filename):
@@ -80,7 +81,7 @@ if __name__ == "__main__":
         height = input_details[0]["shape"][1]
         width = input_details[0]["shape"][2]
         img = Image.open(str(args.tests) + "/" + str(file)).resize((width, height))
-        
+
         # add N dim
         
         input_data = np.expand_dims(img, axis=0)
@@ -106,3 +107,5 @@ if __name__ == "__main__":
                 print("{:08.6f}: {}".format(float(results[i] / 255.0), labels[i]))
 
         print("time: {:.3f}ms".format((stop_time - start_time) * 1000))
+
+    model = keras.models.load_model('new_model')
