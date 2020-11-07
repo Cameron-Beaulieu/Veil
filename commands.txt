@@ -8,8 +8,14 @@ make_image_classifier \
   --tflite_output_file new_mobile_model.tflite \
   --summaries_dir log
 
-#Test the model
+# Test one image
 python label_image.py \
   --input_mean 0 --input_std 255 \
   --model_file new_mobile_model.tflite --label_file class_labels.txt \
   --image tests/apple1.jpg  # <<< Adjust filename.
+
+# Test all images in a folder
+python test_classifier.py \
+  --input_mean 0 --input_std 255 \
+  --model_file new_mobile_model.tflite --label_file class_labels.txt \
+  --tests tests  
