@@ -39,9 +39,7 @@ def removeFiles():
             os.remove(script_dir+"/"+file)
 
 removeFiles()
-imageProcess()
 
-"""
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -84,4 +82,3 @@ video_capture.release()
 cv2.destroyAllWindows()
 
 '''
-"""
