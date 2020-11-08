@@ -1,50 +1,62 @@
 from flask import Flask
 from flask import jsonify, request
 from flask_cors import CORS
+from PIL import Image
+from io import BytesIO
+import numpy
+import base64
+
+import file_to_call_script
+
 app = Flask(__name__)
 CORS(app)
 
-from PIL import Image
-import numpy
-import base64
-import test
-from io import BytesIO
+def listToDict(lst):
+    arr = []
+    for i in range(0, len(lst), 3):
+         res_dct = {"file_name":lst[i], "label":lst[i + 1], "confidence":lst[i + 2]}
+         arr.append(res_dct)
+    result = {"data":arr}
+    return(result)
 
+def txtToJson(file_name):
+    with open(file_name) as fh: 
+        for line in fh: 
+            line = line.replace("{", "")
+            line = line.replace("}", "")
+            line = line.replace("'", "")
+            line = line.replace(":", "")
+            line = line.replace("(", "")
+            line = line.replace(")", "")
+            line = line.replace(",", "")
+            result = listToDict(line.split())
+            return result
 
 def base64toImg(base64_string):
-    print('asdf')
     base64_string = base64_string.replace(base64_string[:22], '', 1) 
     imgdata = base64.b64decode(base64_string)
-    filename = 'screenshot.png'  # I assume you have a way of picking unique filenames
+    filename = 'screenshot.png'
     with open(filename, 'wb') as f:
         f.write(imgdata)
-    # f gets closed when you exit the with statement
-    # Now save the value of filename to your database
+
 
 @app.route('/')
 def home():
-    print('bb')
-    return "Mask Detection API!"
+    return ('hello!')
 
-@app.route('/capture')
-def capture():
-    #take the screenshot from the screenshot file
-    #feed that into the python file that does image processing
-    #return the faces
-    return test.hello()
+# @app.route('/labels')
+# def home():
+#     return txtToJson('dictionaryOfResults.txt')
 
-@app.route('/predict')
-def predict():
-    #run function that tests the images found in the tests folder, returns dict
-    return jsonify("one")
-
-#Recieve base 64 str
+#\ Takes in base64 string, runs bash script, and returns results
 @app.route('/saveImg', methods=['POST']) #GET requests will be blocked
 def saveImg():
     req_data = request.get_json()
     base64str = req_data['base64str']
     base64toImg(base64str)
-    return jsonify("success")
+    file_to_call_script.callBashScript()
+    
+    return txtToJson('dictionaryOfResults.txt')
 
 if __name__ == '__main__':
     app.run(port=8000)
