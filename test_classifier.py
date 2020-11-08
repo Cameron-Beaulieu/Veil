@@ -34,7 +34,7 @@ def assignLabelToImage (dictionaryOfValuesandLabels):
     if dictionaryOfValuesandLabels[key] > highestPercentage:
       highestPercentage = dictionaryOfValuesandLabels[key]
       highestLabel= key
-  return highestLabel,highestPercentage
+  return highestLabel,highestPercentage*100
   
 def load_labels(filename):
     with open(filename, "r") as f:

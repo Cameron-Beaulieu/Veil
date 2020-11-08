@@ -61,7 +61,7 @@ export default class ImageCapture extends Component {
       let labelStr = "";
 
       if (this.state.labels[i].label == "FaceTrainingSet") {
-        labelStr = "No mask ";
+        labelStr = "No Mask ";
       } else {
         labelStr = "Mask ";
       }
@@ -69,7 +69,7 @@ export default class ImageCapture extends Component {
         <div className="result">
           <img id="face" src={"data:image/jpg;base64," + this.state.faces[i]} />
           {labelStr}
-          {"confidence: " + this.state.labels[i].confidence.substring(0,6)}
+          {"Confidence: " + this.state.labels[i].confidence.substring(0,6)+"%"}
         </div>)
       
     }
