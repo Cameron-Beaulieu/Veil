@@ -14,7 +14,7 @@ export default class ImageCapture extends Component {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state.screenshot),
+      body: JSON.stringify({"base64str":image}),
     };
     fetch("http://localhost:8000/saveImg", requestOptions)
       .then((response) => response.json())
@@ -43,7 +43,16 @@ export default class ImageCapture extends Component {
   }
 
   showFaces() {
-    for (var i = 0; i < this.state.labels.length; i++) {
+    
+    console.log(this.state.faces)
+    console.log(this.state.labels)
+
+    if(this.state.faces != null && this.state.labels != null)
+    {
+      let elements = []
+    for (var i = 0; i < (this.state.labels).length; i++) {
+      
+      console.log(i)
       let labelStr = "";
 
       if (this.state.labels[i].label == "FaceTrainingSet") {
@@ -51,31 +60,16 @@ export default class ImageCapture extends Component {
       } else {
         labelStr = "Mask";
       }
-      return (
+      elements.push(
         <div>
-          <img src={this.state.images[i]} />
+          <img src={"data:image/jpg;base64," + this.state.faces[i]} />
           {labelStr}
           {"confidence: " + this.state.labels[i].confidence}
-        </div>
-      );
+        </div>)
+      
     }
-
-    // for (const entry in this.state.labels) {
-    //   let labelStr = "";
-
-    //   if (entry[1] == "FaceTrainingSet") {
-    //     labelStr = "No mask";
-    //   } else {
-    //     labelStr = "Mask";
-    //   }
-    //   return (
-    //     <div>
-    //       <img src={this.state.images[i]} />
-    //       {labelStr}
-    //       {"confidence: " + entry[2]}
-    //     </div>
-    //   );
-    // }
+    return elements
+  }
   }
 
   render() {
@@ -85,9 +79,8 @@ export default class ImageCapture extends Component {
         <button onClick={this.screenshot.bind(this)}>Capture Image</button>
         <button onClick={this.showFaces.bind(this)}>Show Faces</button>
         {this.state.screenshot ? <img src={this.state.screenshot} /> : null}
-        {
-          //this.state.labels ? this.showFaces() : null}
-        }
+        {this.state.labels ? this.showFaces() : null}
+        
       </div>
     );
   }

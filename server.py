@@ -60,7 +60,7 @@ def getImgs():
             arr.append(encoded_string)
             print(encoded_string, file=sys.stderr)
     result = {"data":arr}
-    print(result, file=sys.stderr)
+    #print(result, file=sys.stderr)
     return (result)
 
 # Takes in base64 string, runs bash script, and returns results
