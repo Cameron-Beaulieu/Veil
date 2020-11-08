@@ -2,14 +2,14 @@
 
 ## Index
 <ul>
-<li><a href="## Team">Team</a></li>
-<li><a href="## Preface">Preface</a></li>
-<li><a href="## Tools and Technologies">Tools and Technologies</a></li>
-<li><a href="## Pre-requisites">Pre-requisites</a></li>
-<li><a href="## Mission">Mission</a></li>
-<li><a href="## Current Features">Current Features</a></li>
-<li><a href="## Watch Our Demo">Watch Our Demo</a></li>
-<li><a href="## Future Features">Future Features</a></li>
+<li><a href="#team">Team</a></li>
+<li><a href="#preface">Preface</a></li>
+<li><a href="#tools-and-technologies">Tools and Technologies</a></li>
+<li><a href="#pre-requisites">Pre-requisites</a></li>
+<li><a href="#mission">Mission</a></li>
+<li><a href="#current-features">Current Features</a></li>
+<li><a href="#watch-our-demo">Watch Our Demo</a></li>
+<li><a href="#future-features">Future Features</a></li>
 </ul>
 
 ## Team
