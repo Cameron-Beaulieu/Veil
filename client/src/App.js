@@ -45,6 +45,7 @@ export default class ImageCapture extends Component {
   screenshot() {
     // access the webcam trough this.refs
     var screenshot = this.refs.webcam.getScreenshot();
+    console.log(screenshot)
     this.setState({ screenshot: screenshot });
   }
 
