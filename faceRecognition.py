@@ -7,14 +7,17 @@ import keyboard
 import os
 from pathlib import Path
 
-script_dir = os.getcwd()
+script_dir= os.getcwd()
 script_dir = script_dir+"/tests/"
+
 
 #open-cv video capabilities
 cap = cv2.VideoCapture(0)
 
 def imageProcess():
+    removeFiles()
     i = 0
+    
     image = face_recognition.load_image_file('frame.jpg')
     face_landmarks_list = face_recognition.face_landmarks(image)    
     face_locations = face_recognition.face_locations(image)
@@ -29,6 +32,13 @@ def imageProcess():
         pil_image.save(script_dir+'ip'+str(i)+'.jpg')
         i = i + 1
 
+#clears tests folder every time the file is ran
+def removeFiles():
+    for subdir, dirs, files in os.walk(script_dir):
+        for file in files:
+            os.remove(script_dir+"/"+file)
+
+removeFiles()
 
 while(True):
     # Capture frame-by-frame
@@ -54,8 +64,6 @@ while(True):
     # Display the resulting frame
     if cv2.waitKey(20) & 0xFF == ord('q'):
         break
-
-imageProcess()    
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()

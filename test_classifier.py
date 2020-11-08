@@ -68,8 +68,11 @@ def classifyImages():
 
     list = os.listdir(args.tests)  
     num_files = len(list)
-    print(list)
-    print(num_files)
+
+    for i in list:
+      if(i == ".DS_Store"):
+        list.remove(i)
+
     listOfAllClassifiedImages = {}
     for file in list:
 
