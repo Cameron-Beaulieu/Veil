@@ -11,11 +11,14 @@ import base64
 import test
 from io import BytesIO
 import np
+import sys
 
 
 def base64toImg(base64_string):
+    print('asdf')
+    base64_string = base64_string.replace(base64_string[:22], '', 1) 
     imgdata = base64.b64decode(base64_string)
-    filename = 'some_image.webp'  # I assume you have a way of picking unique filenames
+    filename = 'some_image.png'  # I assume you have a way of picking unique filenames
     with open(filename, 'wb') as f:
         f.write(imgdata)
     # f gets closed when you exit the with statement
@@ -23,6 +26,8 @@ def base64toImg(base64_string):
 
 @app.route('/')
 def home():
+    print('bb')
+    print('Hello world!', file=sys.stderr)
     return "Mask Detection API!"
 
 @app.route('/capture')
@@ -39,10 +44,10 @@ def predict():
 
 #Recieve base 64 str
 @app.route('/saveImg', methods=['POST']) #GET requests will be blocked
-def json_example():
+def saveImg():
     req_data = request.get_json()
+    print('Hello world!', file=sys.stderr)
     base64str = req_data['base64str']
-    print(base64str)
     base64toImg(base64str)
     return jsonify("success")
 
