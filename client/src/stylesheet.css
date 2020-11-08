@@ -1,0 +1,12 @@
+
+#webcam {
+    width: 500px;
+	height: 375px;
+}
+
+/*
+<button id="screenshotBtn" onClick={this.screenshot.bind(this)}>Capture Image</button>
+<button id="showBtn" onClick={this.showFaces.bind(this)}>Show Faces</button>
+{this.state.screenshot ? <img id="screenshot" src={this.state.screenshot} /> : null}
+{this.state.labels ? this.showFaces() : null}
+*/

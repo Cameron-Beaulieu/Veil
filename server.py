@@ -6,6 +6,7 @@ from io import BytesIO
 import numpy
 import base64
 import os
+import time
 
 import sys
 
@@ -52,6 +53,7 @@ def home():
 def getImgs():
     arr = []
     directory = "./tests"
+    time.sleep(3)
     for filename in os.listdir(directory):
         filename = "./tests/" + filename
         with open(filename, "rb") as image_file:

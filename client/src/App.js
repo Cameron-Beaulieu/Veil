@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import { Component } from "react";
 import Webcam from "react-webcam";
+import styles from '../src/stylesheet.css'; 
 
 export default class ImageCapture extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ export default class ImageCapture extends Component {
         this.setState({ labels: json.data });
       });
 
+    setTimeout(() => {
+
     // GET request to /getImgs to get the faces
     const requestOptions2 = {
       method: "GET",
@@ -32,6 +35,8 @@ export default class ImageCapture extends Component {
       .then((json) => {
         this.setState({ faces: json.data });
       });
+
+    }, 3000);
   }
 
   screenshot() {
@@ -75,11 +80,11 @@ export default class ImageCapture extends Component {
   render() {
     return (
       <div>
-        <Webcam screenshotFormat={"image/png"} audio={false} ref="webcam" />
-        <button onClick={this.screenshot.bind(this)}>Capture Image</button>
-        <button onClick={this.showFaces.bind(this)}>Show Faces</button>
-        {this.state.screenshot ? <img src={this.state.screenshot} /> : null}
-        {this.state.labels ? this.showFaces() : null}
+        <Webcam id="webcam" screenshotFormat={"image/png"} audio={false} ref="webcam" />
+        <button id="screenshotBtn" onClick={this.screenshot.bind(this)}>Capture Image</button>
+        <button id="showBtn" onClick={this.showFaces.bind(this)}>Show Faces</button>
+        {this.state.screenshot ? <img id="screenshot" src={this.state.screenshot} /> : null}
+        {this.state.labels && this.state.faces ? this.showFaces() : null}
         
       </div>
     );
