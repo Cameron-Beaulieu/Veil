@@ -39,8 +39,8 @@ export default class ImageCapture extends Component {
   }
 
   showFaces() {
-    for (entry in this.state.labels) {
-      labelStr = "";
+    for (const entry in this.state.labels) {
+      let labelStr = "";
 
       if (entry[1] == "FaceTrainingSet") {
         labelStr = "No mask";
