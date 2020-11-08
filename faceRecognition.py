@@ -28,7 +28,7 @@ def imageProcess():
         # You can access the actual face itself like this:
         face_image = image[top:bottom, left:right]
         pil_image = Image.fromarray(face_image)
-        pil_image.show()
+        #pil_image.show()
         pil_image.save(script_dir+'ip'+str(i)+'.jpg')
         i = i + 1
 

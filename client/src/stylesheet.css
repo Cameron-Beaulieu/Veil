@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body {
+    background-color: #E2EBFB; 
+}
 #webcam,#screenshot {
     width: 50%;
     height: auto;
@@ -35,6 +38,7 @@
 #container{
     float: left;
     background-color: #E2EBFB;
+
 }
 
 #face{

@@ -1,1 +1,1 @@
-{'ip0.jpg': ('FaceTrainingSet', 96.72183990478516)}
+{'ip0.jpg': ('FaceTrainingSet', 75.01283884048462)}
