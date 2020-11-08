@@ -1,2 +1,2 @@
-apples
-oranges
+FaceTrainingSet
+MaskTrainingSet

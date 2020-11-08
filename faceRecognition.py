@@ -18,7 +18,7 @@ def imageProcess():
     removeFiles()
     i = 0
     
-    image = face_recognition.load_image_file('frame.jpg')
+    image = face_recognition.load_image_file('screenshot.png')
     face_landmarks_list = face_recognition.face_landmarks(image)    
     face_locations = face_recognition.face_locations(image)
 
