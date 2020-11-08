@@ -5,6 +5,7 @@ from PIL import Image
 from io import BytesIO
 import numpy
 import base64
+import os
 
 import sys
 
@@ -46,19 +47,31 @@ def base64toImg(base64_string):
 def home():
     return ('hello!')
 
-# @app.route('/labels')
-# def home():
-#     return txtToJson('dictionaryOfResults.txt')
+# Sends array of base64 strings from images in tests
+@app.route('/getImgs')
+def getImgs():
+    arr = []
+    directory = "./tests"
+    for filename in os.listdir(directory):
+        filename = "./tests/" + filename
+        with open(filename, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+            encoded_string = encoded_string.decode('utf-8')
+            arr.append(encoded_string)
+            print(encoded_string, file=sys.stderr)
+    result = {"data":arr}
+    print(result, file=sys.stderr)
+    return (result)
 
-#\ Takes in base64 string, runs bash script, and returns results
+# Takes in base64 string, runs bash script, and returns results
 @app.route('/saveImg', methods=['POST']) #GET requests will be blocked
 def saveImg():
     req_data = request.get_json()
     base64str = req_data['base64str']
     base64toImg(base64str)
-    print('aaaatput', file=sys.stdout)
+    #print('aaaatput', file=sys.stdout)
     file_to_call_script.callBashScript()
-    print('Tbbbbb output', file=sys.stdout)
+    #print('Tbbbbb output', file=sys.stdout)
     return txtToJson('dictionaryOfResults.txt')
 
 
