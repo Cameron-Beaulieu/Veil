@@ -33,7 +33,7 @@ def assignLabelToImage (dictionaryOfValuesandLabels):
     if dictionaryOfValuesandLabels[key] > highestPercentage:
       highestPercentage = dictionaryOfValuesandLabels[key]
       highestLabel= key
-  return highestLabel
+  return highestLabel,highestPercentage
   
 def load_labels(filename):
     with open(filename, "r") as f:
@@ -70,7 +70,7 @@ def classifyImages():
     num_files = len(list)
     print(list)
     print(num_files)
-    listOfAllClassifiedImages = []
+    listOfAllClassifiedImages = {}
     for file in list:
 
         interpreter = tf.lite.Interpreter(
@@ -116,5 +116,10 @@ def classifyImages():
                 sys.exit(1)
         
 
-        listOfAllClassifiedImages.append([img,assignLabelToImage(labelsAndPercentages)])
+        listOfAllClassifiedImages[file]=assignLabelToImage(labelsAndPercentages)
     return listOfAllClassifiedImages
+
+
+fileToBeWritten = open("dictionaryOfResults.txt", "w")
+fileToBeWritten.write(str(classifyImages()))
+fileToBeWritten.close()
