@@ -6,6 +6,8 @@ from io import BytesIO
 import numpy
 import base64
 
+import sys
+
 import file_to_call_script
 
 app = Flask(__name__)
@@ -54,9 +56,11 @@ def saveImg():
     req_data = request.get_json()
     base64str = req_data['base64str']
     base64toImg(base64str)
+    print('aaaatput', file=sys.stdout)
     file_to_call_script.callBashScript()
-    
+    print('Tbbbbb output', file=sys.stdout)
     return txtToJson('dictionaryOfResults.txt')
+
 
 if __name__ == '__main__':
     app.run(port=8000)
