@@ -25,6 +25,7 @@ import os
 import numpy as np
 from PIL import Image
 import tensorflow as tf  # TF2
+from tensorflow import keras
 
 def assignLabelToImage (dictionaryOfValuesandLabels):
   highestPercentage = 0
@@ -91,7 +92,7 @@ def classifyImages():
         height = input_details[0]["shape"][1]
         width = input_details[0]["shape"][2]
         img = Image.open(str(args.tests) + "/" + str(file)).resize((width, height))
-        
+
         # add N dim
         
         input_data = np.expand_dims(img, axis=0)
