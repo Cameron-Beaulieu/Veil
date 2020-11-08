@@ -61,15 +61,15 @@ export default class ImageCapture extends Component {
       let labelStr = "";
 
       if (this.state.labels[i].label == "FaceTrainingSet") {
-        labelStr = "No mask";
+        labelStr = "No mask ";
       } else {
-        labelStr = "Mask";
+        labelStr = "Mask ";
       }
       elements.push(
-        <div>
-          <img src={"data:image/jpg;base64," + this.state.faces[i]} />
+        <div className="result">
+          <img id="face" src={"data:image/jpg;base64," + this.state.faces[i]} />
           {labelStr}
-          {"confidence: " + this.state.labels[i].confidence}
+          {"confidence: " + this.state.labels[i].confidence.substring(0,6)}
         </div>)
       
     }
@@ -79,11 +79,11 @@ export default class ImageCapture extends Component {
 
   render() {
     return (
-      <div>
+      <div id="container">
+        <img id="banner" src="/veil.png" />
         <Webcam id="webcam" screenshotFormat={"image/png"} audio={false} ref="webcam" />
-        <button id="screenshotBtn" onClick={this.screenshot.bind(this)}>Capture Image</button>
-        <button id="showBtn" onClick={this.showFaces.bind(this)}>Show Faces</button>
-        {this.state.screenshot ? <img id="screenshot" src={this.state.screenshot} /> : null}
+        {this.state.screenshot ? <img id="screenshot" src={this.state.screenshot}/> : null}
+        <button id="screenshotBtn" onClick={this.screenshot.bind(this)}>Detect Masks</button>
         {this.state.labels && this.state.faces ? this.showFaces() : null}
         
       </div>

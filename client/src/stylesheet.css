@@ -1,8 +1,50 @@
-
-#webcam {
-    width: 500px;
-	height: 375px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+#webcam,#screenshot {
+    width: 50%;
+    height: auto;
 }
+
+#banner{
+    width: 100%;
+    height: 200px;
+}
+
+#screenshotBtn{
+    width: 100%;
+    padding: 2%;
+    display: block;
+    font-size: 32px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    background-color: #363F4E;
+    color: #E2EBFB;
+    font-family: Montserrat;
+    font-weight: bold;
+
+}
+
+.result{
+    height: 20%;
+    width: 20%;
+    float: left;
+    justify-content: center;
+    text-align: center;
+}
+
+#container{
+    float: left;
+    background-color: #E2EBFB;
+}
+
+#face{
+    padding: 10%;
+    height: 80%;
+    width: 80%;
+}
+
+
+
 
 /*
 <button id="screenshotBtn" onClick={this.screenshot.bind(this)}>Capture Image</button>
