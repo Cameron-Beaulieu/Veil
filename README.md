@@ -56,7 +56,7 @@ Veil was developed in hopes of being able to identify those not wearing masks as
 - The faces are displayed to the screen with an indication of whether or not they are wearing a face mask
 
 ## Watch Our Demo
-
+[Demo Video](https://youtu.be/igIYOyoMusU)
 ## Future Features
  - Train with a larger database to create a more accurate model that can handle more edge cases
  - Change the image capturing to video capture allowing for real time calls to the model 
